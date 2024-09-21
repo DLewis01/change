@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# Function to display program usage
+show_usage() {
+    echo "This script changes a given file into another filetype."
+    echo "If the file is a graphic file, it will offer to convert it to another format such as webm, gif, jpg, png, tif."
+    echo "If the file is a video file, it will offer to convert it to formats like mp4, wav, or mp3."
+    echo "If the file is an audio file, it will offer formats like mp3, wav, ogg, opus, m4a, ape."
+    echo ""
+}
+
+# Function to handle file conversion
+convert_file() {
+    local file="$1"
+    extension="${file##*.}"
+
+    case "$extension" in
+        jpg|png|gif|tif|webm)
+            echo "This is a graphic file. Choose a format to convert to:"
+            echo "1) jpg"
+            echo "2) png"
+            echo "3) gif"
+            echo "4) tif"
+            echo "5) webm"
+            read -p "Enter your choice: " choice
+            case $choice in
+                1) new_ext="jpg";;
+                2) new_ext="png";;
+                3) new_ext="gif";;
+                4) new_ext="tif";;
+                5) new_ext="webm";;
+                *) echo "Invalid choice."; exit 1;;
+            esac
+            convert "$file" "${file%.*}.$new_ext"
+            echo "Conversion complete: ${file%.*}.$new_ext"
+            ;;
+        
+        mp4|mkv|avi|mov)
+            echo "This is a video file. Choose a format to convert to:"
+            echo "1) mp4"
+            echo "2) wav"
+            echo "3) mp3"
+            read -p "Enter your choice: " choice
+            case $choice in
+                1) new_ext="mp4";;
+                2) new_ext="wav";;
+                3) new_ext="mp3";;
+                *) echo "Invalid choice."; exit 1;;
+            esac
+            ffmpeg -i "$file" "${file%.*}.$new_ext"
+            echo "Conversion complete: ${file%.*}.$new_ext"
+            ;;
+
+        mp3|wav|ogg|opus|m4a|ape)
+            echo "This is an audio file. Choose a format to convert to:"
+            echo "1) mp3"
+            echo "2) wav"
+            echo "3) ogg"
+            echo "4) opus"
+            echo "5) m4a"
+            echo "6) ape"
+            read -p "Enter your choice: " choice
+            case $choice in
+                1) new_ext="mp3";;
+                2) new_ext="wav";;
+                3) new_ext="ogg";;
+                4) new_ext="opus";;
+                5) new_ext="m4a";;
+                6) new_ext="ape";;
+                *) echo "Invalid choice."; exit 1;;
+            esac
+            ffmpeg -i "$file" "${file%.*}.$new_ext"
+            echo "Conversion complete: ${file%.*}.$new_ext"
+            ;;
+
+        *)
+            echo "Unsupported file type."
+            exit 1
+            ;;
+    esac
+}
+
+# Main script logic
+if [ -z "$1" ]; then
+    show_usage
+    #read -p "Enter filename or type 'exit' to quit: " input
+    #if [ "$input" == "exit" ]; then
+        exit 0
+    #fi
+    #convert_file "$input"
+else
+    convert_file "$1"
+fi

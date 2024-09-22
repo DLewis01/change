@@ -33,6 +33,9 @@ chmod +x change
 
 To run it, type change {filename}
 examples:
+
 change myfile.mp4
+
 change myfile.webm
+
 chamge myfile.jpg

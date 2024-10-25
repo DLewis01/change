@@ -1,6 +1,8 @@
 # change
 Change one filetype (image,video,audio) into another
 
+I often have downloads of images, audio or video in different formats to what I need, so this is a simple script to change them into a different format of your chosing.
+
 Requirements:
  - imagemagick
  - ffmpeg
@@ -32,6 +34,7 @@ Put this file, change, into your local bin directory then make the script execut
 chmod +x change
 
 To run it, type change {filename}
+
 examples:
 
 change myfile.mp4

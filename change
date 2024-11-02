@@ -6,6 +6,7 @@ show_usage() {
     echo "If the file is a graphic file, it will offer to convert it to another format such as webm, gif, jpg, png, tif."
     echo "If the file is a video file, it will offer to convert it to formats like mp4, wav, or mp3."
     echo "If the file is an audio file, it will offer formats like mp3, wav, ogg, opus, m4a, ape."
+	echo "If the file is a pdf file, it will offer formats like text, image, html."
     echo ""
 }
 
@@ -73,7 +74,32 @@ convert_file() {
             echo "Conversion complete: ${file%.*}.$new_ext"
             ;;
 
-        *)
+		pdf)
+			echo "PDF file. Choose a format to convert to:"
+			echo "1) txt"
+			echo "2) html"
+			echo "3) image(jpg)"
+			read -p "Enter your choice: " choice
+			case $choice in
+				1) new_ext="txt";;
+				2) new_ext="html";;
+				3) new_ext="jpg";;
+				*) echo "Invalid choice."; exit 1;;
+			esac
+			if ( $choice -eq 1 )
+				then
+				pdftotext "$file" "${file%.*}.$new_ext"
+			fi
+			if ( $choice -eq 2 )
+				then
+				pdftohtml "$file" "${file%.*}.$new_ext"
+			fi
+			if ( $choice -eq 1 ){
+				then
+				pdfimages -j "$file" "${file%.*}.$new_ext"
+			fi
+      
+		*)	
             echo "Unsupported file type."
             exit 1
             ;;

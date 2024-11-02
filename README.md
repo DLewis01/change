@@ -39,14 +39,15 @@ Requirements:
 
 
 Put this file, change, into your local bin directory then make the script executable with
-chmod +x change
+
+      chmod +x change
 
 To run it, type change {filename}
 
 examples:
 
-change myfile.mp4
+    change myfile.mp4
 
-change myfile.webm
+    change myfile.webm
 
-chamge myfile.jpg
+    chamge myfile.jpg

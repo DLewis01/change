@@ -1,5 +1,5 @@
 # change
-Change one filetype (image,video,audio) into another
+Change one filetype (image,video,audio,pdf) into another
 
 I often have downloads of images, audio, pdf's or video's in different formats to what I need, so this is a simple script to change them into a different format of your chosing.
 

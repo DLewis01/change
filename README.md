@@ -10,9 +10,9 @@ Requirements:
 
   For MAC 
 
-     sudo brew install imagemagick
-     sudo brew install ffmpeg
-     sudo brew install poppler
+     brew install imagemagick
+     brew install libvpx ffmpeg
+     brew install poppler
   For Ubuntu/Debian:
  
      sudo apt-get install imagemagick
